@@ -1,12 +1,19 @@
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import User from '../models/User.js';
 
+// --- THIS IS THE GUARANTEED FIX ---
+// Determine the callback URL based on the environment
+const googleCallbackURL = process.env.NODE_ENV === 'production'
+  ? `${process.env.BACKEND_URL}/api/auth/google/callback`
+  : '/api/auth/google/callback';
+// --- END OF GUARANTEED FIX ---
+
 export default function(passport) {
   passport.use(
     new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: '/api/auth/google/callback',
+        callbackURL: googleCallbackURL, // Use the dynamic URL
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
@@ -32,6 +39,7 @@ export default function(passport) {
       }
     )
   );
+
   passport.serializeUser((user, done) => done(null, user.id));
   passport.deserializeUser(async (id, done) => {
     try {
