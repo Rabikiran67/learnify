@@ -38,8 +38,8 @@ const RegisterPage = () => {
   };
 
   const handleGoogleSignUp = () => {
-    const backendUrl = import.meta.env.VITE_API_BASE_URL;
-    window.location.href = `${backendUrl}/api/auth/google`;
+    const backendUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+    window.location.href = `${backendUrl}/api/auth/google/register`;
   };
 
   return (
