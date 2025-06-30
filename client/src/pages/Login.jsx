@@ -33,7 +33,11 @@ const LoginPage = () => {
     }
   };
 
-  const handleGoogleLogin = () => { window.location.href = 'http://localhost:5000/api/auth/google'; };
+  const handleGoogleLogin = () => {
+    // Construct the full backend URL using the environment variable
+    const backendUrl = import.meta.env.VITE_API_BASE_URL;
+    window.location.href = `${backendUrl}/api/auth/google`;
+  };
 
   return (
     <div className="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl flex">
