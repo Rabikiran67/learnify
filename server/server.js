@@ -8,7 +8,7 @@ import morgan from 'morgan';
 import colors from 'colors';
 import session from 'express-session';
 import passport from 'passport';
-import rateLimit from 'express-rate-limit'; // <-- IMPORT
+import rateLimit from 'express-rate-limit';
 
 import configurePassport from './config/passport.js';
 import connectDB from './config/database.js';
@@ -46,8 +46,30 @@ configurePassport(passport);
 connectDB();
 const app = express();
 
+// --- THIS IS THE GUARANTEED FIX: CORS Configuration for Production ---
+// We create a whitelist of allowed origins.
+const whitelist = [
+  'http://localhost:5173', // For local development
+  'https://learnify-three-black.vercel.app' // Your live Vercel frontend
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    // or if the origin is in our whitelist.
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+// --- END OF GUARANTEED FIX ---
+
 app.use(express.json());
-app.use(cors());
 app.use(helmet({ contentSecurityPolicy: false }));
 
 if (process.env.NODE_ENV === 'development') {
@@ -62,21 +84,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-// --- THIS IS THE NEW SECURITY FEATURE ---
-// Rate Limiting Configuration
 const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 minutes
-  max: 100, // Limit each IP to 100 requests per windowMs
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-  message: 'Too many requests from this IP, please try again after 10 minutes'
+  windowMs: 10 * 60 * 1000,
+  max: 200, // Increased limit slightly
 });
-
-// Apply the rate limiter to all API routes
 app.use('/api', limiter);
-// --- END OF NEW SECURITY FEATURE ---
-
 
 // Mount API routers
 app.use('/api/auth', authRoutes);
@@ -90,13 +102,11 @@ app.use('/api/quizzes', quizRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/assignments', assignmentRoutes);
 
-const rootDir = path.resolve();
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(rootDir, '/client/dist')));
-  app.get('*', (req, res) => res.sendFile(path.resolve(rootDir, 'client', 'dist', 'index.html')));
-} else {
-  app.get('/', (req, res) => res.send('API is running...'));
-}
+// For production, the backend doesn't need to serve static files anymore
+// as Vercel is handling the frontend.
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
 
 app.use(errorHandler);
 
