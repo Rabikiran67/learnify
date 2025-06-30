@@ -14,8 +14,8 @@ import AdminRoute from './components/common/AdminRoute.jsx';
 import PublicLayout from './components/layout/PublicLayout.jsx';
 
 import RootRedirect from './pages/RootRedirect.jsx';
-import LoginPage from './pages/login.jsx';
-import RegisterPage from './pages/register.jsx';
+import LoginPage from './pages/Login.jsx';
+import RegisterPage from './pages/Register.jsx';
 import CoursesPage from './pages/Courses.jsx';
 import CourseDetailPage from './pages/CourseDetail.jsx';
 import DashboardPage from './pages/Dashboard.jsx';
