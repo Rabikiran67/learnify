@@ -26,7 +26,7 @@ const PublicHeader = () => {
             to="/register"
             className="px-4 py-2 bg-primary-light text-white font-semibold rounded-lg hover:bg-opacity-90"
           >
-            Create an Account
+            Register
           </NavLink>
         </div>
       </nav>
