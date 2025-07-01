@@ -83,7 +83,7 @@ const CreateCoursePage = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label htmlFor="price-create" className="block text-gray-700 font-bold mb-2">Price ($)</label>
+              <label htmlFor="price-create" className="block text-gray-700 font-bold mb-2">Price (₹)</label>
               <input type="number" id="price-create" name="price" value={price} onChange={(e) => setPrice(e.target.value)} required className="w-full px-3 py-2 border rounded" min="0" step="0.01" />
             </div>
             <div>

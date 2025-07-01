@@ -66,8 +66,8 @@ const CourseDetailPage = () => {
             <div className="mt-6"><h2 className="text-2xl font-bold text-gray-800 mb-2">Description</h2><p className="text-gray-700 text-lg leading-relaxed">{course.description}</p></div>
             <div className="mt-6 flex flex-wrap gap-4 items-center"><span className="bg-blue-100 text-blue-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded">Level: {course.level}</span><span className="bg-green-100 text-green-800 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded">Duration: {course.duration} hours</span></div>
             <div className="mt-8 flex justify-between items-center">
-              <p className="text-4xl font-bold text-green-600">${course.price}</p>
-              
+              <p className="text-4xl font-bold text-green-600">₹{course.price}</p>
+
               {isInstructorOfCourse ? (
                 <Link to={`/instructor/courses/${course._id}/manage`} className="bg-purple-600 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-purple-700">Manage Your Course</Link>
               ) : isAlreadyEnrolled ? (

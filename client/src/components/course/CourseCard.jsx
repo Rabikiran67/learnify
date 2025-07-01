@@ -41,7 +41,7 @@ const CourseCard = ({ course, baseLink = '/courses' }) => {
           By {course.instructor?.name || 'Unknown'}
         </p>
         <p className="text-lg font-bold text-green-600">
-          ${course.price}
+          ₹{course.price}
         </p>
       </div>
     </div>
