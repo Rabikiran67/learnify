@@ -103,3 +103,52 @@ From the root of the project, run the following command to start both backend an
 
 ```bash
 npm run dev
+
+🧪 Environment Setup
+server/.env
+NODE_ENV=development
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+SESSION_SECRET=your_session_secret
+
+CLOUDINARY_CLOUD_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_cloudinary_key
+CLOUDINARY_API_SECRET=your_cloudinary_secret
+
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your_gmail_address
+SMTP_PASS=your_gmail_app_password
+
+client/.env
+VITE_API_BASE_URL=http://localhost:5000
+VITE_GOOGLE_CLIENT_ID=your_google_client_id
+
+🚢 Deployment Guide
+🔧 Backend (Render)
+Root Directory: server
+
+Build Command: npm install
+
+Start Command: npm start
+
+Environment Variables: same as in server/.env
+
+💻 Frontend (Vercel)
+Framework: Vite
+
+Root Directory: client
+
+Environment Variables:
+
+VITE_API_BASE_URL: URL of Render backend
+
+VITE_GOOGLE_CLIENT_ID: your Google client ID
+
+👤 Author
+Rabi Kiran (Gipsy)
+Full Stack Developer | MERN Enthusiast
