@@ -50,12 +50,12 @@ const LoginPage = () => {
   // --- END OF FIX ---
 
   return (
-    <div className="w-full max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl flex">
-      <div className="w-1/2 p-8 hidden md:flex items-center justify-center bg-primary-light rounded-l-2xl">
+    <div className="w-full max-w-sm md:max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row">
+      <div className="w-full md:w-1/2 p-8 hidden md:flex items-center justify-center bg-primary-light rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
         <img src="/auth-illustration.png" alt="Learning Illustration" className="max-w-full h-auto" />
       </div>
       <div className="w-full md:w-1/2 p-8 md:p-12">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Sign in</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 text-center md:text-left">Sign in</h2>
         <form onSubmit={submitHandler} className="space-y-5">
           <div><label htmlFor="email" className="text-sm font-medium text-gray-700">Your Email</label><input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-dark focus:border-primary-dark" /></div>
           <div><label htmlFor="password"  className="text-sm font-medium text-gray-700">Password</label><input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-primary-dark focus:border-primary-dark" /></div>
