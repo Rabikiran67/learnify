@@ -54,22 +54,22 @@ A comprehensive, full-stack **online learning platform** built using the **MERN*
 ### 🔑 Authentication
 | Login Page | Register Page |
 |------------|----------------|
-| ![](./docs/login-page.png) | ![](./docs/register-page.png) |
+| ![](login-page.png) | ![](register-page.png) |
 
 ### 🧑‍🎓 Student Interface
 | Dashboard | Course Learning |
 |-----------|------------------|
-| ![](./docs/student-dashboard.png) | ![](./docs/learning-page.png) |
+| ![](student-dashboard.png) | ![](learning-page.png) |
 
 ### 🧑‍🏫 Instructor Panel
 | My Courses | Manage Course |
 |------------|----------------|
-| ![](./docs/instructor-dashboard.png) | ![](./docs/manage-course.png) |
+| ![](instructor-dashboard.png) | ![](manage-course.png) |
 
 ### 👑 Admin Panel
 | Users | Courses |
 |--------|---------|
-| ![](./docs/admin-users.png) | ![](./docs/admin-courses.png) |
+| ![](admin-users.png) | ![](admin-courses.png) |
 
 ---
 
