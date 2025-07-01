@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { useRegisterMutation } from '../services/authService';
@@ -14,6 +14,22 @@ const RegisterPage = () => {
   const dispatch = useDispatch();
   const [register, { isLoading }] = useRegisterMutation();
   const { userInfo } = useSelector((state) => state.auth);
+  
+  // --- THIS IS THE FIX ---
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    // Show error toast from Google redirect if it exists
+    const error = searchParams.get('error');
+    if (error) {
+      toast.error(error);
+      // Optional: redirect to login page if the error indicates they should log in
+      if (error.includes('already registered')) {
+        navigate('/login');
+      }
+    }
+  }, [searchParams, navigate]);
+  // --- END OF FIX ---
 
   useEffect(() => {
     if (userInfo) {
@@ -44,13 +60,9 @@ const RegisterPage = () => {
 
   return (
     <div className="w-full max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl flex">
-      {/* Left Side: Illustration */}
       <div className="w-1/2 p-8 hidden md:flex items-center justify-center bg-primary-light rounded-l-2xl">
         <img src="/auth-illustration.png" alt="Learning Illustration" className="max-w-full h-auto" />
       </div>
-
-      {/* Right Side: Form */}
-      {/* --- THIS IS THE FIX: Changed p-8 md:p-12 to p-6 md:p-8 --- */}
       <div className="w-full md:w-1/2 p-6 md:p-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Sign up</h2>
         <form onSubmit={submitHandler} className="space-y-4">

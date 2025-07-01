@@ -11,38 +11,40 @@ export default function(passport) {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: googleCallbackURL,
-        passReqToCallback: true // Pass the request object to the callback
+        passReqToCallback: true,
       },
       async (req, accessToken, refreshToken, profile, done) => {
         try {
-          // --- THIS IS THE GUARANTEED FIX ---
-          // Check if a user exists with this Google ID OR this email address
-          let user = await User.findOne({ 
-            $or: [{ googleId: profile.id }, { email: profile.emails[0].value }] 
-          });
-
-          // The 'state' parameter helps us know if this flow started from 'login' or 'register'
           const state = JSON.parse(req.query.state);
+          const email = profile.emails[0].value;
+
+          // --- THIS IS THE GUARANTEED FIX ---
+          let user = await User.findOne({ email: email });
 
           if (user) {
-            // User exists. If they don't have a googleId yet, add it.
+            // User with this email already exists.
+            if (state.action === 'register') {
+              // If they are on the register page, this is an error.
+              return done(null, false, { message: 'This email is already registered. Please log in.' });
+            }
+            // If they are on the login page, link their Google ID if it doesn't exist.
             if (!user.googleId) {
               user.googleId = profile.id;
               await user.save();
             }
-            return done(null, user); // Proceed with login
+            return done(null, user);
           } else {
             // User does not exist.
             if (state.action === 'register') {
-              // If the action was 'register', it's okay to create a new user.
+              // If they are on the register page, create a new account.
               const newUser = await User.create({
                 googleId: profile.id,
                 name: profile.displayName,
-                email: profile.emails[0].value,
+                email: email,
               });
               return done(null, newUser);
             } else {
-              // If the action was 'login', do NOT create a user. Return an error.
+              // If they are on the login page, this is an error.
               return done(null, false, { message: 'This email is not registered. Please sign up first.' });
             }
           }
