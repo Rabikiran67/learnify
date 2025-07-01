@@ -104,6 +104,12 @@ From the root of the project, run the following command to start both backend an
 ```bash
 npm run dev
 
+📡 Backend: http://localhost:5000
+
+🌐 Frontend: http://localhost:5173
+
+
+
 🧪 Environment Setup
 server/.env
 NODE_ENV=development
