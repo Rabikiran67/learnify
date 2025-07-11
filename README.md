@@ -8,6 +8,30 @@ A comprehensive, full-stack **online learning platform** built using the **MERN*
 
 ---
 
+## 📸 Screenshots
+
+### 🔑 Authentication
+| Login Page | Register Page |
+|------------|----------------|
+| <img src="login-page.png" alt="Login Page" width="400"/> | <img src="register-page.png" alt="Register Page" width="400"/> |
+
+### 🧑‍🎓 Student Interface
+| Dashboard | Course Learning |
+|-----------|------------------|
+| <img src="student-dashboard.png" alt="Student Dashboard" width="400"/> | <img src="learning-page.png" alt="Course Learning Page" width="400"/> |
+
+### 🧑‍🏫 Instructor Panel
+| My Courses | Manage Course |
+|------------|----------------|
+| <img src="instructor-dashboard.png" alt="Instructor Dashboard" width="400"/> | <img src="manage-course.png" alt="Manage Course Page" width="400"/> |
+
+### 👑 Admin Panel
+| Users | Courses |
+|--------|---------|
+| <img src="admin-users.png" alt="Admin Users Management" width="400"/> | <img src="admin-courses.png" alt="Admin Courses Management" width="400"/> |
+
+---
+
 ## ✨ Key Features
 
 ### 🧑‍🎓 Student
@@ -47,30 +71,6 @@ A comprehensive, full-stack **online learning platform** built using the **MERN*
 - Responsive UI with Tailwind CSS
 - Clean dashboards for each role
 - Rich-text editing with react-quill
-
----
-
-## 📸 Screenshots
-
-### 🔑 Authentication
-| Login Page | Register Page |
-|------------|----------------|
-| <img src="login-page.png" alt="Login Page" width="400"/> | <img src="register-page.png" alt="Register Page" width="400"/> |
-
-### 🧑‍🎓 Student Interface
-| Dashboard | Course Learning |
-|-----------|------------------|
-| <img src="student-dashboard.png" alt="Student Dashboard" width="400"/> | <img src="learning-page.png" alt="Course Learning Page" width="400"/> |
-
-### 🧑‍🏫 Instructor Panel
-| My Courses | Manage Course |
-|------------|----------------|
-| <img src="instructor-dashboard.png" alt="Instructor Dashboard" width="400"/> | <img src="manage-course.png" alt="Manage Course Page" width="400"/> |
-
-### 👑 Admin Panel
-| Users | Courses |
-|--------|---------|
-| <img src="admin-users.png" alt="Admin Users Management" width="400"/> | <img src="admin-courses.png" alt="Admin Courses Management" width="400"/> |
 
 ---
 
