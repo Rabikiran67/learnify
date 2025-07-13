@@ -14,14 +14,16 @@ const DashboardPage = () => {
   // --- END OF FIX ---
 
   return (
-    <div className="container mx-auto">
-      <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-xl">
-        <h1 className="text-4xl font-extrabold text-center mb-10 text-gray-800">
+    <div className="h-full flex flex-col">
+      <div className="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-xl flex-1 overflow-y-auto">
+        <h1 className="text-3xl font-extrabold text-center mb-6 text-gray-800">
           My Courses
         </h1>
 
         {isLoading ? (
-          <Loader />
+          <div className="flex items-center justify-center h-64">
+            <Loader />
+          </div>
         ) : error ? (
           <Message variant="danger">
             {error?.data?.message || error.error || 'Could not fetch your courses.'}
@@ -39,7 +41,7 @@ const DashboardPage = () => {
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {validEnrollments.map((enrollment) => (
                   <CourseCard key={enrollment._id} course={enrollment.course} baseLink="/learn" />
                 ))}

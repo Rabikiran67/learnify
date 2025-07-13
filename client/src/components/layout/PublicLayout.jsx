@@ -4,8 +4,8 @@ import PublicFooter from './PublicFooter';
 
 const PublicLayout = () => {
   return (
-    // This creates the main container with a clean background
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    // This creates the main container with the Vanta background
+    <div className="flex flex-col min-h-screen">
       {/* --- The Header is now correctly included --- */}
       <PublicHeader />
       

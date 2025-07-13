@@ -29,7 +29,7 @@ const DashboardLayout = () => {
       <div className="h-16 flex items-center justify-center text-2xl font-bold border-b border-white/20 flex-shrink-0">
         <Link to="/">Learnify</Link>
       </div>
-      <nav className="flex-1 px-2 py-4 space-y-1">
+      <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
         {isAdmin && (<>
             <NavLink to="/instructor/dashboard" end className={({isActive}) => isActive ? activeLinkClass : inactiveLinkClass}>My Courses Dashboard</NavLink><hr className="my-2 border-white/20" />
             <p className="px-4 pt-2 pb-2 text-xs font-semibold text-gray-400 uppercase">Admin Panel</p>
@@ -50,14 +50,14 @@ const DashboardLayout = () => {
         <NavLink to="/courses" end className={({isActive}) => isActive ? activeLinkClass : inactiveLinkClass}>All Courses</NavLink>
         <NavLink to="/profile" className={({isActive}) => isActive ? activeLinkClass : inactiveLinkClass}>Profile</NavLink>
       </nav>
-      <div className="px-2 py-4 border-t border-white/20">
+      <div className="px-2 py-4 border-t border-white/20 flex-shrink-0">
         <button onClick={logoutHandler} className="w-full flex items-center px-4 py-2 text-gray-300 rounded-md hover:bg-accent-red hover:text-white">Logout</button>
       </div>
     </>
   );
 
   return (
-    <div className="relative min-h-screen md:flex">
+    <div className="h-screen flex overflow-hidden">
       {/* Mobile Menu Overlay */}
       <div onClick={() => setSidebarOpen(false)} className={`fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden ${sidebarOpen ? 'block' : 'hidden'}`}></div>
       
@@ -67,14 +67,14 @@ const DashboardLayout = () => {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col overflow-hidden">
         <header className="bg-primary-dark shadow-sm h-16 flex justify-between items-center px-6 flex-shrink-0">
           <button onClick={() => setSidebarOpen(true)} className="text-white md:hidden">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
           </button>
           <span className="font-semibold text-white text-right">Welcome, {userInfo.name}! ({userInfo.role})</span>
         </header>
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 bg-cover bg-center" style={{ backgroundImage: "url('/dashboard-background.jpg')" }}>
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6">
           <Outlet />
         </main>
       </div>

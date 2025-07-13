@@ -7,7 +7,7 @@ import Message from '../components/common/Message';
 
 // A reusable component for rendering a table for a specific role
 const UserTable = ({ title, users, deleteHandler, isLoadingDelete }) => (
-  <div className="mb-10">
+  <div className="mb-8">
     <h2 className="text-2xl font-bold mb-4 text-gray-700">{title}</h2>
     <div className="overflow-x-auto bg-white rounded-lg shadow">
       <table className="min-w-full">
@@ -67,10 +67,14 @@ const UserListPage = () => {
   // --- END OF NEW LOGIC ---
 
   return (
-    <div className="container mx-auto">
-      <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-xl">
+    <div className="h-full flex flex-col">
+      <div className="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-xl flex-1 overflow-y-auto">
         <h1 className="text-3xl font-bold mb-6">Manage Users</h1>
-        {isLoading ? <Loader /> : error ? (
+        {isLoading ? (
+          <div className="flex items-center justify-center h-64">
+            <Loader />
+          </div>
+        ) : error ? (
           <Message variant="danger">{error?.data?.message || error.error}</Message>
         ) : (
           <div>

@@ -57,56 +57,58 @@ const CreateCoursePage = () => {
   };
 
   return (
-    <div className="container mx-auto bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-xl">
-      <h1 className="text-3xl font-bold mb-6 text-center">Create New Course</h1>
-      {categoriesError ? <Message variant="danger">Could not load categories.</Message> : (
-        <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
-          {/* --- THIS IS THE GUARANTEED FIX --- */}
-          <div className="mb-4">
-            <label htmlFor="thumbnail-create" className="block text-gray-700 font-bold mb-2">Course Thumbnail (Optional)</label>
-            <input type="file" id="thumbnail-create" name="image" onChange={handleFileChange} accept="image/*" className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
-            {thumbnailPreview && ( <div className="mt-4"> <p className="text-sm font-semibold">Image Preview:</p> <img src={thumbnailPreview} alt="Thumbnail Preview" className="h-40 w-auto rounded-lg object-cover" /> </div> )}
-          </div>
-          <div className="mb-4">
-            <label htmlFor="title-create" className="block text-gray-700 font-bold mb-2">Course Title</label>
-            <input type="text" id="title-create" name="title" value={title} onChange={(e) => setTitle(e.target.value)} required className="w-full px-3 py-2 border rounded" />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="description-create" className="block text-gray-700 font-bold mb-2">Description</label>
-            <textarea id="description-create" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required className="w-full px-3 py-2 border rounded" rows="4"></textarea>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="tags-create" className="block text-gray-700 font-bold mb-2">Tags</label>
-            {/* The TagsInput library does not use a standard input, so it doesn't need an id/htmlFor match */}
-            <TagsInput value={tags} onChange={setTags} name="tags" placeHolder="Enter tags and press enter" />
-            <p className="text-xs text-gray-500 mt-1">Press enter to add a new tag.</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label htmlFor="price-create" className="block text-gray-700 font-bold mb-2">Price (₹)</label>
-              <input type="number" id="price-create" name="price" value={price} onChange={(e) => setPrice(e.target.value)} required className="w-full px-3 py-2 border rounded" min="0" step="0.01" />
+    <div className="h-full flex flex-col">
+      <div className="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-xl flex-1 overflow-y-auto">
+        <h1 className="text-3xl font-bold mb-6 text-center">Create New Course</h1>
+        {categoriesError ? <Message variant="danger">Could not load categories.</Message> : (
+          <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
+            {/* --- THIS IS THE GUARANTEED FIX --- */}
+            <div className="mb-4">
+              <label htmlFor="thumbnail-create" className="block text-gray-700 font-bold mb-2">Course Thumbnail (Optional)</label>
+              <input type="file" id="thumbnail-create" name="image" onChange={handleFileChange} accept="image/*" className="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+              {thumbnailPreview && ( <div className="mt-4"> <p className="text-sm font-semibold">Image Preview:</p> <img src={thumbnailPreview} alt="Thumbnail Preview" className="h-40 w-auto rounded-lg object-cover" /> </div> )}
             </div>
-            <div>
-              <label htmlFor="duration-create" className="block text-gray-700 font-bold mb-2">Duration (hours)</label>
-              <input type="number" id="duration-create" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)} required className="w-full px-3 py-2 border rounded" min="0" />
+            <div className="mb-4">
+              <label htmlFor="title-create" className="block text-gray-700 font-bold mb-2">Course Title</label>
+              <input type="text" id="title-create" name="title" value={title} onChange={(e) => setTitle(e.target.value)} required className="w-full px-3 py-2 border rounded" />
             </div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div>
-              <label htmlFor="category-create" className="block text-gray-700 font-bold mb-2">Category</label>
-              {isLoadingCategories ? <Loader /> : ( <select id="category-create" name="category" value={category} onChange={(e) => setCategory(e.target.value)} required className="w-full px-3 py-2 border rounded bg-white"> <option value="" disabled>Select Category...</option> {categoriesData?.data.map((cat) => ( <option key={cat._id} value={cat._id}>{cat.name}</option> ))} </select> )}
+            <div className="mb-4">
+              <label htmlFor="description-create" className="block text-gray-700 font-bold mb-2">Description</label>
+              <textarea id="description-create" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required className="w-full px-3 py-2 border rounded" rows="4"></textarea>
             </div>
-            <div>
-              <label htmlFor="level-create" className="block text-gray-700 font-bold mb-2">Level</label>
-              <select id="level-create" name="level" value={level} onChange={(e) => setLevel(e.target.value)} required className="w-full px-3 py-2 border rounded bg-white"> <option>Beginner</option> <option>Intermediate</option> <option>Advanced</option> <option>All Levels</option> </select>
+            <div className="mb-4">
+              <label htmlFor="tags-create" className="block text-gray-700 font-bold mb-2">Tags</label>
+              {/* The TagsInput library does not use a standard input, so it doesn't need an id/htmlFor match */}
+              <TagsInput value={tags} onChange={setTags} name="tags" placeHolder="Enter tags and press enter" />
+              <p className="text-xs text-gray-500 mt-1">Press enter to add a new tag.</p>
             </div>
-          </div>
-          {/* --- END OF FIX --- */}
-          <button type="submit" disabled={isCreatingCourse} className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 disabled:bg-blue-400">
-            {isCreatingCourse ? 'Creating...' : 'Create Course'}
-          </button>
-        </form>
-      )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label htmlFor="price-create" className="block text-gray-700 font-bold mb-2">Price (₹)</label>
+                <input type="number" id="price-create" name="price" value={price} onChange={(e) => setPrice(e.target.value)} required className="w-full px-3 py-2 border rounded" min="0" step="0.01" />
+              </div>
+              <div>
+                <label htmlFor="duration-create" className="block text-gray-700 font-bold mb-2">Duration (hours)</label>
+                <input type="number" id="duration-create" name="duration" value={duration} onChange={(e) => setDuration(e.target.value)} required className="w-full px-3 py-2 border rounded" min="0" />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div>
+                <label htmlFor="category-create" className="block text-gray-700 font-bold mb-2">Category</label>
+                {isLoadingCategories ? <Loader /> : ( <select id="category-create" name="category" value={category} onChange={(e) => setCategory(e.target.value)} required className="w-full px-3 py-2 border rounded bg-white"> <option value="" disabled>Select Category...</option> {categoriesData?.data.map((cat) => ( <option key={cat._id} value={cat._id}>{cat.name}</option> ))} </select> )}
+              </div>
+              <div>
+                <label htmlFor="level-create" className="block text-gray-700 font-bold mb-2">Level</label>
+                <select id="level-create" name="level" value={level} onChange={(e) => setLevel(e.target.value)} required className="w-full px-3 py-2 border rounded bg-white"> <option>Beginner</option> <option>Intermediate</option> <option>Advanced</option> <option>All Levels</option> </select>
+              </div>
+            </div>
+            {/* --- END OF FIX --- */}
+            <button type="submit" disabled={isCreatingCourse} className="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 disabled:bg-blue-400">
+              {isCreatingCourse ? 'Creating...' : 'Create Course'}
+            </button>
+          </form>
+        )}
+      </div>
     </div>
   );
 };

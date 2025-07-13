@@ -50,7 +50,7 @@ const LoginPage = () => {
   // --- END OF FIX ---
 
   return (
-    <div className="w-full max-w-sm md:max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl flex flex-col md:flex-row">
+    <div className="w-full max-w-sm md:max-w-3xl mx-auto bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl flex flex-col md:flex-row">
       <div className="w-full md:w-1/2 p-8 hidden md:flex items-center justify-center bg-primary-light rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
         <img src="/auth-illustration.png" alt="Learning Illustration" className="max-w-full h-auto" />
       </div>
